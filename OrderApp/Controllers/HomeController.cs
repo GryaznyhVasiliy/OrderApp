@@ -36,6 +36,14 @@ namespace OrderApp.Controllers
         public IActionResult CreateOrder(Order order)
         {
             db.Orders.Add(order);
+            if(order.Weight == 0)
+            {
+                throw new Exception("Не введён вес");
+            }
+            if(order.ReciveDate == DateTime.MinValue)
+            {
+                throw new Exception("Не введена дата");
+            }
             db.SaveChanges();
             return View();
         }
